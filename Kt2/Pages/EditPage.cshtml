@@ -1,0 +1,55 @@
+﻿@page
+@model Kt2.Pages.EditPageModel
+@{
+}
+
+<h2>Edit Page</h2>
+
+<form method="post">
+    <div class="form-group">
+        <label for="editor">Content:</label>
+        <textarea id="editor" name="Content" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            tinymce.init({
+                selector: '#editor',
+                height: 500,
+                menubar: false,
+                plugins: [
+                    'advlist autolink lists link image charmap print preview anchor',
+                    'searchreplace visualblocks code fullscreen',
+                    'insertdatetime media table paste code help wordcount',
+                    'image' // Добавляем плагин для работы с изображениями
+                ],
+                toolbar: 'undo redo | formatselect | bold italic backcolor | \
+                          alignleft aligncenter alignright alignjustify | \
+                          bullist numlist outdent indent | removeformat | help | image', // Добавляем кнопку для вставки изображений
+                // Настройка загрузки изображений
+                images_upload_url: '/EditPage/UploadImage', // Эндпоинт для загрузки изображений
+                images_upload_handler: function (blobInfo, success, failure) {
+                    const formData = new FormData();
+                    formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                    fetch('/EditPage/UploadImage', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.url) {
+                            success(data.url);
+                        } else {
+                            failure('Upload failed');
+                        }
+                    })
+                    .catch(() => failure('Upload failed'));
+                }
+            });
+        });
+    </script>
+}

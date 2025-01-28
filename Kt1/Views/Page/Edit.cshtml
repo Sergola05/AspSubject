@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Редактирование сообщения";
+}
+
+<h2>Редактирование сообщения</h2>
+
+<form method="post" action="/Page/Edit">
+    <div class="form-group">
+        <label for="message">Введите сообщение:</label>
+        <input type="text" class="form-control" id="message" name="message" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Отправить</button>
+</form>
