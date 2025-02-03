@@ -37,5 +37,10 @@ namespace Kt3.Controllers
             HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
             return new ContentResult { Content = "Page not found", ContentType = "text/plain" };
         }
+        public IActionResult Cookie()
+        {
+            HttpContext.Response.Cookies.Append("user", "Answer");
+            return new ContentResult { Content = "Cookie 'user' has been set to 'Answer'", ContentType = "text/plain" };
+        }
     }
 }
