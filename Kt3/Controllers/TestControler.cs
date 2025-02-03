@@ -21,5 +21,16 @@ namespace Kt3.Controllers
             HttpContext.Response.ContentType = "application/json";
             return new JsonResult(data);
         }
+        public async Task<IActionResult> File()
+        {
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "test.txt");
+            await System.IO.File.WriteAllTextAsync(filePath, "This is a test file");
+
+            HttpContext.Response.ContentType = "text/plain";
+            HttpContext.Response.Headers.Add("Content-Disposition", "attachment; filename=test.txt");
+            await HttpContext.Response.SendFileAsync(filePath);
+
+            return new EmptyResult();
+        }
     }
 }
