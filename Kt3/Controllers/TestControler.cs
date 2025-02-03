@@ -15,5 +15,11 @@ namespace Kt3.Controllers
             HttpContext.Response.ContentType = "text/html";
             return new ContentResult { Content = htmlContent };
         }
+        public IActionResult Json()
+        {
+            var data = new { Name = "John", Age = 30 };
+            HttpContext.Response.ContentType = "application/json";
+            return new JsonResult(data);
+        }
     }
 }
