@@ -32,5 +32,10 @@ namespace Kt3.Controllers
 
             return new EmptyResult();
         }
+        public IActionResult Status()
+        {
+            HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
+            return new ContentResult { Content = "Page not found", ContentType = "text/plain" };
+        }
     }
 }
