@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kt1", "Kt1\Kt1.csproj", "{4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kt2", "Kt2\Kt2.csproj", "{4965302E-7CC9-4001-9A73-D160F4EB595D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kt3", "Kt3\Kt3.csproj", "{3A419DA9-170D-4A5E-A33C-D3EEF349C450}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kt4", "Kt3\Kt4.csproj", "{3A419DA9-170D-4A5E-A33C-D3EEF349C450}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
