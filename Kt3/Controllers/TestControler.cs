@@ -4,43 +4,42 @@ namespace Kt3.Controllers
 {
     public class TestControler : Controller
     {
-        public IActionResult Text()
+        public async Task Text()
         {
             HttpContext.Response.ContentType = "text/plain";
-            return new ContentResult { Content = "Hello, world!" };
+            await HttpContext.Response.WriteAsync("Hello, world!");
         }
-        public IActionResult Html()
+
+        public async Task Html()
         {
-            string htmlContent = "<h1>Hello, World!</h1><p>This is a test HTML page.</p>";
             HttpContext.Response.ContentType = "text/html";
-            return new ContentResult { Content = htmlContent };
+            await HttpContext.Response.WriteAsync("<h1>Hello</h1><p>World!</p>");
         }
-        public IActionResult Json()
+
+        public async Task Json()
         {
-            var data = new { Name = "John", Age = 30 };
             HttpContext.Response.ContentType = "application/json";
-            return new JsonResult(data);
+            var data = new { Name = "Maxime", Age = 20 };
+            await HttpContext.Response.WriteAsJsonAsync(data);
         }
-        public async Task<IActionResult> File()
+
+        public async Task File()
         {
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "test.txt");
-            await System.IO.File.WriteAllTextAsync(filePath, "This is a test file");
-
             HttpContext.Response.ContentType = "text/plain";
-            HttpContext.Response.Headers.Add("Content-Disposition", "attachment; filename=test.txt");
             await HttpContext.Response.SendFileAsync(filePath);
+        }
 
-            return new EmptyResult();
-        }
-        public IActionResult Status()
+        public async Task Status()
         {
-            HttpContext.Response.StatusCode = StatusCodes.Status404NotFound;
-            return new ContentResult { Content = "Page not found", ContentType = "text/plain" };
+            HttpContext.Response.StatusCode = 404;
+            await HttpContext.Response.WriteAsync("Not Found");
         }
-        public IActionResult Cookie()
+
+        public async Task Cookie()
         {
             HttpContext.Response.Cookies.Append("user", "Answer");
-            return new ContentResult { Content = "Cookie 'user' has been set to 'Answer'", ContentType = "text/plain" };
+            await HttpContext.Response.WriteAsync("Cookie set successfully.");
         }
     }
 }
